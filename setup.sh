@@ -1,3 +1,4 @@
+apt update -y
 apt install sudo -y
 apt install neofetch -y
 apt install wget -y
