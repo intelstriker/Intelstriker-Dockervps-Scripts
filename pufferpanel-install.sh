@@ -1,3 +1,8 @@
+sudo killall apt apt-get
+sudo killall dpkg
+sudo rm -f /var/lib/dpkg/lock-frontend
+sudo rm -f /var/cache/apt/archives/lock
+
 apt install curl -y
 apt install sudo -y
 apt-get update && apt-get install -y expect
