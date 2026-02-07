@@ -1,12 +1,17 @@
-apt update && apt install -y wireguard iproute2 iptables curl && umask 077 && [ ! -f /etc/wireguard/server_private.key ] && wg genkey | tee /etc/wireguard/server_private.key | wg pubkey > /etc/wireguard/server_public.key; clear; SERVER_PUB=$(cat /etc/wireguard/server_public.key); SERVER_IP=$(curl -s ifconfig.me); CLIENT_PRIV=$(wg genkey); CLIENT_PUB=$(echo "$CLIENT_PRIV" | wg pubkey); cat <<EOF
+mkdir -p /usr/local/bin && cat <<'EOF' > /usr/local/bin/vpn-info
+#!/bin/bash
+cat <<CONFIG
 [Interface]
-PrivateKey = $CLIENT_PRIV
+PrivateKey = eArIX4dNDb0HaSlFVX5ac45f3tuVuFSXAtxHVjLrQ1Q=
 Address = 10.0.0.2/24
 DNS = 1.1.1.1
 
 [Peer]
-PublicKey = $SERVER_PUB
-Endpoint = $SERVER_IP:51820
+PublicKey = lmlLYjy8jVLPr4D/B+S7qM5ar74JoIoNeWfRK09Xk2o=
+Endpoint = 194.233.78.54:51820
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
+CONFIG
 EOF
+
+chmod +x /usr/local/bin/vpn-info && echo "Command vpn-info installed!"
